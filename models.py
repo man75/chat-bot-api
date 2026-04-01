@@ -26,6 +26,7 @@ class Conversation(Base):
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     widget_id = Column(String, ForeignKey("widgets.id"))
     created_at = Column(DateTime, default=datetime.utcnow)
+    state_json = Column(String, nullable=True)
 
 
 class Message(Base):

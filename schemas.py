@@ -20,3 +20,4 @@ class ChatResponse(BaseModel):
     reply: str
     conversationId: str
     action: Optional[ChatAction] = None
+    quickReplies: Optional[list[str]] = None
