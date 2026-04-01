@@ -3,7 +3,7 @@
 from schemas import ChatAction
 
 CALENDLY_URL = "https://calendly.com/d/cppt-9xd-rv3/appel-10-min?month=2026-04"
-PHONE_NUMBER  = "tel:+33400000000"
+PHONE_NUMBER = "tel:+33400000000"
 
 CALENDLY_ACTION = ChatAction(
     type="link",
@@ -17,12 +17,9 @@ PHONE_ACTION = ChatAction(
     url=PHONE_NUMBER
 )
 
-ENERGIES = ["essence", "diesel", "hybride", "électrique", "gpl"]
+ENERGIES = ["Essence", "Diesel", "Hybride", "Électrique", "GPL"]
 
 MENU = (
-    "Bonjour 👋 Bienvenue au garage ! Comment puis-je vous aider ?\n\n"
-    "1️⃣  Prendre un rendez-vous\n"
-    "2️⃣  Demander un devis\n"
-    "3️⃣  Poser une question\n\n"
-    "Tapez le numéro ou décrivez directement votre besoin."
+    "Bonjour 👋 Bienvenue au garage.\n"
+    "Choisissez une action en cliquant sur un bouton ci-dessous."
 )
