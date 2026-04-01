@@ -104,5 +104,7 @@ def chat(request: ChatRequest, db: Session = Depends(get_db)):
         reply=reply_text,
         conversationId=str(conversation.id),
         action=action,
-        quickReplies=quick_replies
+        quickReplies=quick_replies,
+        quick_replies=quick_replies,
+        buttons=quick_replies
     )

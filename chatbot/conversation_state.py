@@ -25,6 +25,14 @@ class Step(str, Enum):
     DEVIS_DONE = "devis_done"
 
 
+LEGACY_STEP_MAP = {
+    "collect_telephone": Step.COLLECT_NOM,
+    "collect_mail": Step.COLLECT_NOM,
+    "rdv_done": Step.DEVIS_DONE,
+    "question_done": Step.DEVIS_DONE,
+}
+
+
 @dataclass
 class ConversationState:
     intent: Intent = Intent.NONE
@@ -41,10 +49,30 @@ class ConversationState:
         )
 
     @classmethod
+    def _parse_step(cls, raw_step: Optional[str]) -> Optional[Step]:
+        if not raw_step:
+            return None
+
+        if raw_step in LEGACY_STEP_MAP:
+            return LEGACY_STEP_MAP[raw_step]
+
+        try:
+            return Step(raw_step)
+        except ValueError:
+            return None
+
+    @classmethod
     def from_json(cls, raw: str) -> "ConversationState":
         data = json.loads(raw)
+
+        raw_intent = data.get("intent", "none")
+        try:
+            intent = Intent(raw_intent)
+        except ValueError:
+            intent = Intent.NONE
+
         return cls(
-            intent=Intent(data.get("intent", "none")),
-            step=Step(data["step"]) if data.get("step") else None,
+            intent=intent,
+            step=cls._parse_step(data.get("step")),
             collected=data.get("collected", {}),
         )
